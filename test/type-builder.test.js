@@ -1,13 +1,13 @@
 require('should');
-var Builder = require('../lib/builder');
+var TypeBuilder = require('../lib/type-builder');
 var TypeObject = require('../lib/type-object');
 var TypeVector = require('../lib/type-vector');
 
-describe('Builder', function () {
+describe('TypeBuilder', function () {
 
     describe('#buildTypeConstructor({P_Q_inner_data})', function () {
         it('should return a P_Q_inner_data', function (done) {
-            var P_Q_inner_data = new Builder('namespace', {"id": "-2083955988", "predicate": "p_q_inner_data", "params": [
+            var P_Q_inner_data = new TypeBuilder('namespace', {"id": "-2083955988", "predicate": "p_q_inner_data", "params": [
                 {"name": "pq", "type": "bytes"},
                 {"name": "p", "type": "bytes"},
                 {"name": "q", "type": "bytes"},
@@ -27,7 +27,7 @@ describe('Builder', function () {
 
     describe('#buildTypeConstructor({ResPQ}).deserialize()', function () {
         it('should build and de-serialize an instance of ResPQ', function (done) {
-            var ResPQ = new Builder('namespace', {"id": "85337187", "predicate": "resPQ", "params": [
+            var ResPQ = new TypeBuilder('namespace', {"id": "85337187", "predicate": "resPQ", "params": [
                 {"name": "nonce", "type": "int128"},
                 {"name": "server_nonce", "type": "int128"},
                 {"name": "pq", "type": "bytes"},
@@ -57,7 +57,7 @@ describe('Builder', function () {
 
     describe('#buildTypeConstructor({ResPQ}).serialize()', function () {
         it('should build and serialize an instance of ResPQ', function (done) {
-            var ResPQ = new Builder('namespace', {"id": "85337187", "predicate": "resPQ", "params": [
+            var ResPQ = new TypeBuilder('namespace', {"id": "85337187", "predicate": "resPQ", "params": [
                 {"name": "nonce", "type": "int128"},
                 {"name": "server_nonce", "type": "int128"},
                 {"name": "pq", "type": "bytes"},
@@ -94,7 +94,7 @@ describe('Builder', function () {
                     };
                 };
             }
-            var reqPQ = new Builder('namespace', {"id": "1615239032", "method": "req_pq", "params": [
+            var reqPQ = new TypeBuilder('namespace', {"id": "1615239032", "method": "req_pq", "params": [
                 {"name": "nonce", "type": "int128"}
             ], "type": "ResPQ"}, wrapperMessage).getType();
             reqPQ.should.be.an.instanceof(Function);
