@@ -1,7 +1,7 @@
 require('should');
 var Builder = require('../lib/builder');
 var TypeObject = require('../lib/type-object');
-var Vector = require('../lib/vector');
+var TypeVector = require('../lib/type-vector');
 
 describe('Builder', function () {
 
@@ -68,7 +68,7 @@ describe('Builder', function () {
                 nonce: '0xfce2ec8fa401b366e927ca8c8249053e',
                 server_nonce: '0x30739073a54aba77a81ea1f4334dcfa5',
                 pq: new Buffer('17ed48941a08f981', 'hex'),
-                server_public_key_fingerprints: new Vector({type: 'long', list: ['0xc3b42b026ce86b21']})
+                server_public_key_fingerprints: new TypeVector({type: 'long', list: ['0xc3b42b026ce86b21']})
             }
             });
             var objBuffer = obj.serialize();
