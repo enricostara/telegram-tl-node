@@ -1,6 +1,6 @@
 require('should');
 var Builder = require('../lib/builder');
-var AbstractObject = require('../lib/abstract-object');
+var TypeObject = require('../lib/type-object');
 var Vector = require('../lib/vector');
 
 describe('Builder', function () {
@@ -18,7 +18,7 @@ describe('Builder', function () {
             P_Q_inner_data.should.be.an.instanceof(Function);
             var obj = new P_Q_inner_data();
             obj.should.be.an.instanceof(P_Q_inner_data);
-            obj.should.be.an.instanceof(AbstractObject);
+            obj.should.be.an.instanceof(TypeObject);
             obj.id.should.be.eql('ec5ac983');
             obj.typeName.should.be.eql('namespace.P_q_inner_data');
             done();
@@ -38,7 +38,7 @@ describe('Builder', function () {
                 '632416053E0549828CCA27E966B301A48FECE2FCA5CF4D33F4A11EA877BA4AA5739073300817ED48941A08F98100000015C4B51C01000000216BE86C022BB4C3',
                 'hex')});
             obj.should.be.an.instanceof(ResPQ);
-            obj.should.be.an.instanceof(AbstractObject);
+            obj.should.be.an.instanceof(TypeObject);
             obj.deserialize();
             obj.should.have.properties({
                 id: '63241605',

@@ -1,6 +1,6 @@
 require('should');
 var Vector = require('../lib/vector');
-var AbstractObject = require('../lib/abstract-object');
+var AbstractObject = require('../lib/type-object');
 
 describe('Vector', function () {
 
