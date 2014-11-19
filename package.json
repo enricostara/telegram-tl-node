@@ -1,0 +1,39 @@
+{
+    "name": "telegram-tl-node",
+    "version": "0.5.0",
+    "description": "Telegram TL (TypeLanguage) implementation",
+    "keywords": [
+        "telegram",
+        "tl",
+        "typelanguage",
+        "type-language"
+    ],
+    "author": "Enrico Stara <enrico.stara@gmail.com>",
+    "homepage": "https://github.com/enricostara/telegram-tl-node",
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/enricostara/telegram-tl-node.git"
+    },
+    "bugs": {
+        "url": "https://github.com/enricostara/telegram-tl-node/issues"
+    },
+    "license": "BSD-2-Clause",
+    "dependencies": {
+        "get-log": "latest",
+        "jsbn": "latest"
+    },
+    "devDependencies": {
+        "gulp": "*",
+        "gulp-jshint": "*",
+        "gulp-mocha": "*",
+        "mocha": "*",
+        "should": "*"
+    },
+    "main": "index",
+    "engines": {
+        "node": "0.10.x"
+    },
+    "scripts": {
+        "test": "gulp test"
+    }
+}
