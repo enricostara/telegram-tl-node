@@ -1,4 +1,5 @@
 # telegram-tl-node
+[![npm version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Coverage Status][coverage-image]][coverage-url] [![Dependency Status][gemnasium-image]][gemnasium-url]
 
 Telegram TL (TypeLanguage) Node.js implementation
 
@@ -29,3 +30,16 @@ $ npm test
 ## License
 
 The project is released under the [Simplified BSD license](./LICENSE) 
+
+[npm-url]: https://www.npmjs.org/package/telegram.link
+[npm-image]: https://badge.fury.io/js/telegram-tl-node.svg
+
+[travis-url]: https://travis-ci.org/enricostara/telegram-tl-node
+[travis-image]: https://travis-ci.org/enricostara/telegram-tl-node.svg?branch=master
+
+[coverage-url]: https://coveralls.io/r/enricostara/telegram-tl-node?branch=master
+[coverage-image]: https://img.shields.io/coveralls/enricostara/telegram-tl-node.svg
+
+[gemnasium-url]: https://gemnasium.com/enricostara/telegram-tl-node
+[gemnasium-image]: https://gemnasium.com/enricostara/telegram-tl-node.svg
+

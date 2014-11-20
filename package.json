@@ -1,6 +1,6 @@
 {
     "name": "telegram-tl-node",
-    "version": "0.5.1",
+    "version": "0.5.2",
     "description": "Telegram TL (TypeLanguage) implementation",
     "keywords": [
         "telegram",
@@ -25,13 +25,13 @@
     "devDependencies": {
         "coveralls": "latest",
         "istanbul": "latest",
-        "gulp": "*",
-        "gulp-jshint": "*",
-        "gulp-mocha": "*",
+        "gulp": "latest",
+        "gulp-jshint": "latest",
+        "gulp-mocha": "latest",
         "mocha-lcov-reporter": "latest",
         "mocha-better-spec-reporter": "latest",
-        "mocha": "*",
-        "should": "*"
+        "mocha": "latest",
+        "should": "latest"
     },
     "main": "index",
     "engines": {
