@@ -3,8 +3,8 @@
 
 **Telegram TypeLanguage** (TL) library in pure **javascript** on the Node.js platform
 
-[TypeLanguage](https://core.telegram.org/mtproto/TL)
-serves to describe the used system of types, constructors, and existing functions in Telegram Messanger protocol 
+[**TypeLanguage**](https://core.telegram.org/mtproto/TL)
+_"serves to describe the used system of types, constructors, and existing functions"_ of the **Telegram Mobile Protocol** 
 [(MTProto)](https://core.telegram.org/mtproto)
 
 **telegram-tl-node** library implements the core TypeLanguage types (like the base `TypeObject` 
@@ -34,7 +34,7 @@ $ npm test
 
 ## License
 
-The project is released under the [Simplified BSD license](./LICENSE) 
+The project is released under the [MIT](./LICENSE) 
 
 [npm-url]: https://www.npmjs.org/package/telegram.link
 [npm-image]: https://badge.fury.io/js/telegram-tl-node.svg
