@@ -1,15 +1,15 @@
 # telegram-tl-node
 [![npm version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Coverage Status][coverage-image]][coverage-url] [![Dependency Status][gemnasium-image]][gemnasium-url]
 
-**Telegram TypeLanguage** (TL) implementation in pure **javascript** on the Node.js platform
+**Telegram TypeLanguage** (TL) library in pure **javascript** on the Node.js platform
 
 [TypeLanguage](https://core.telegram.org/mtproto/TL)
 serves to describe the used system of types, constructors, and existing functions in Telegram Messanger protocol 
 [(MTProto)](https://core.telegram.org/mtproto)
 
-
-**telegram-tl-node** library implements the core TypeLanguage types like `TypeObject` 
-and others defined [here](https://core.telegram.org/mtproto/TL#example). 
+**telegram-tl-node** library implements the core TypeLanguage types (like the base `TypeObject` 
+and others defined [here](https://core.telegram.org/mtproto/TL#example)) and therefore a layer for the
+[binary data serialization](https://core.telegram.org/mtproto/serialize) of the instances.
 
 This library also implements the `TypeBuilder` class that parses the TypeLanguage [schemas](https://core.telegram.org/schema) 
 in [JSON format](https://core.telegram.org/schema/mtproto-json) and dynamically writes **Type classes and functions** in
