@@ -23,9 +23,13 @@
         "jsbn": "latest"
     },
     "devDependencies": {
+        "coveralls": "latest",
+        "istanbul": "latest",
         "gulp": "*",
         "gulp-jshint": "*",
         "gulp-mocha": "*",
+        "mocha-lcov-reporter": "latest",
+        "mocha-better-spec-reporter": "latest",
         "mocha": "*",
         "should": "*"
     },
@@ -34,6 +38,7 @@
         "node": "0.10.x"
     },
     "scripts": {
-        "test": "gulp test"
+        "test": "gulp test",
+        "coveralls": "istanbul cover ./node_modules/gulp/bin/gulp.js cover && cat ./coverage/lcov.info | coveralls && rm -rf ./coverage"
     }
 }
