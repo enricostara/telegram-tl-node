@@ -1,17 +1,22 @@
 # telegram-tl-node
 [![npm version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Coverage Status][coverage-image]][coverage-url] [![Dependency Status][gemnasium-image]][gemnasium-url]
 
-Telegram TL (TypeLanguage) Node.js implementation
+**Telegram TypeLanguage** (TL) implementation in pure **javascript** on the Node.js platform
 
-[Type Language](https://core.telegram.org/mtproto/TL)
+[TypeLanguage](https://core.telegram.org/mtproto/TL)
 serves to describe the used system of types, constructors, and existing functions in Telegram Messanger protocol 
-[(MTProto)](https://core.telegram.org/mtproto/TL)
+[(MTProto)](https://core.telegram.org/mtproto)
 
-This is the javascript pure implementation in node.js platform.
 
-This library also implements the **TypeBuilder** class that  writes dynamically **Type classes and functions** in
-javascript, parsing the TypeLanguage [schemas](https://core.telegram.org/schema) 
-in [JSON format](https://core.telegram.org/schema/mtproto-json)
+**telegram-tl-node** library implements the core TypeLanguage types like `TypeObject` 
+and others defined [here](https://core.telegram.org/mtproto/TL#example). 
+
+This library also implements the `TypeBuilder` class that parses the TypeLanguage [schemas](https://core.telegram.org/schema) 
+in [JSON format](https://core.telegram.org/schema/mtproto-json) and dynamically writes **Type classes and functions** in
+pure javascript.
+
+The [**telegram.link**](http://telegram.link) <img src="https://raw.githubusercontent.com/enricostara/telegram.link/master/telegram.link.png" 
+width="25" /> main project has a dependency on this library.
 
 ## Installation
 
@@ -42,4 +47,3 @@ The project is released under the [Simplified BSD license](./LICENSE)
 
 [gemnasium-url]: https://gemnasium.com/enricostara/telegram-tl-node
 [gemnasium-image]: https://gemnasium.com/enricostara/telegram-tl-node.svg
-

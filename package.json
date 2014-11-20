@@ -1,7 +1,7 @@
 {
     "name": "telegram-tl-node",
-    "version": "0.5.2",
-    "description": "Telegram TL (TypeLanguage) implementation",
+    "version": "0.5.3",
+    "description": "Telegram TypeLanguage (javascript, node.js)",
     "keywords": [
         "telegram",
         "tl",
@@ -17,7 +17,7 @@
     "bugs": {
         "url": "https://github.com/enricostara/telegram-tl-node/issues"
     },
-    "license": "BSD-2-Clause",
+    "license": "MIT",
     "dependencies": {
         "get-log": "latest",
         "jsbn": "latest"
