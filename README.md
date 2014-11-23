@@ -1,7 +1,7 @@
 # telegram-tl-node
 [![npm version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Coverage Status][coverage-image]][coverage-url] [![Dependency Status][gemnasium-image]][gemnasium-url]
 
-**Telegram TypeLanguage** (TL) library in pure **javascript** on the Node.js platform
+**Telegram TypeLanguage** (TL) unofficial library in pure **javascript** on the Node.js platform
 
 ## About TypeLanguage..
 
