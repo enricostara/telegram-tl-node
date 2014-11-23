@@ -1,12 +1,13 @@
 {
     "name": "telegram-tl-node",
-    "version": "0.5.3",
-    "description": "Telegram TypeLanguage (javascript, node.js)",
+    "version": "0.5.4",
+    "description": "Telegram TypeLanguage library (javascript, node.js)",
     "keywords": [
         "telegram",
         "tl",
         "typelanguage",
-        "type-language"
+        "type-language",
+        "library"
     ],
     "author": "Enrico Stara <enrico.stara@gmail.com>",
     "homepage": "https://github.com/enricostara/telegram-tl-node",
@@ -23,15 +24,16 @@
         "jsbn": "latest"
     },
     "devDependencies": {
-        "coveralls": "latest",
-        "istanbul": "latest",
         "gulp": "latest",
         "gulp-jshint": "latest",
         "gulp-mocha": "latest",
-        "mocha-lcov-reporter": "latest",
-        "mocha-better-spec-reporter": "latest",
+        "should": "latest",
         "mocha": "latest",
-        "should": "latest"
+        "mocha-better-spec-reporter": "latest",
+        "mocha-lcov-reporter": "latest",
+        "coveralls": "latest",
+        "istanbul": "latest",
+        "zuul": "latest"
     },
     "main": "index",
     "engines": {
