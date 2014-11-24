@@ -1,5 +1,5 @@
 # telegram-tl-node
-[![npm version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Coverage Status][coverage-image]][coverage-url] [![Dependency Status][gemnasium-image]][gemnasium-url]
+[![npm version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Coverage Status][coverage-image]][coverage-url]
 
 **Telegram TypeLanguage** (TL) unofficial library in pure **javascript** on the Node.js platform
 
@@ -48,6 +48,3 @@ The project is released under the [MIT License](./LICENSE)
 
 [coverage-url]: https://coveralls.io/r/enricostara/telegram-tl-node?branch=master
 [coverage-image]: https://img.shields.io/coveralls/enricostara/telegram-tl-node.svg
-
-[gemnasium-url]: https://gemnasium.com/enricostara/telegram-tl-node
-[gemnasium-image]: https://gemnasium.com/enricostara/telegram-tl-node.svg
