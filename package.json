@@ -42,6 +42,6 @@
     },
     "scripts": {
         "test": "DEBUG=-mocha*,* gulp test",
-        "coveralls": "CODECLIMATE_REPO_TOKEN=182362a4a766175cd47ad6b0a5cf261d0ddb33b4fc34dc17c97f24328819953e DEBUG=-mocha*,* istanbul cover ./node_modules/gulp/bin/gulp.js cover && cat ./coverage/lcov.info | coveralls && codeclimate < ./coverage/lcov.info &&  rm -rf ./coverage"
+        "coveralls": "DEBUG=-mocha*,* istanbul cover ./node_modules/gulp/bin/gulp.js cover && cat ./coverage/lcov.info | coveralls && codeclimate < ./coverage/lcov.info &&  rm -rf ./coverage"
     }
 }

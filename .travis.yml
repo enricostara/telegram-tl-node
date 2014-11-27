@@ -3,3 +3,4 @@ node_js:
    - "0.10"
 after_script:
    - npm run coveralls
+env: CODECLIMATE_REPO_TOKEN=182362a4a766175cd47ad6b0a5cf261d0ddb33b4fc34dc17c97f24328819953e
