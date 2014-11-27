@@ -1,7 +1,7 @@
 {
     "name": "telegram-tl-node",
-    "version": "0.5.4",
-    "description": "Telegram TypeLanguage library (javascript, node.js)",
+    "version": "0.5.6",
+    "description": "Telegram TypeLanguage library",
     "keywords": [
         "telegram",
         "tl",
@@ -32,6 +32,7 @@
         "mocha-better-spec-reporter": "latest",
         "mocha-lcov-reporter": "latest",
         "coveralls": "latest",
+        "codeclimate-test-reporter": "latest",
         "istanbul": "latest",
         "zuul": "latest"
     },
@@ -40,7 +41,7 @@
         "node": "0.10.x"
     },
     "scripts": {
-        "test": "gulp test",
-        "coveralls": "istanbul cover ./node_modules/gulp/bin/gulp.js cover && cat ./coverage/lcov.info | coveralls && rm -rf ./coverage"
+        "test": "DEBUG=-mocha*,* gulp test",
+        "coveralls": "CODECLIMATE_REPO_TOKEN=182362a4a766175cd47ad6b0a5cf261d0ddb33b4fc34dc17c97f24328819953e DEBUG=-mocha*,* istanbul cover ./node_modules/gulp/bin/gulp.js cover && cat ./coverage/lcov.info | coveralls && codeclimate < ./coverage/lcov.info &&  rm -rf ./coverage"
     }
 }
