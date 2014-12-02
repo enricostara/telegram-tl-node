@@ -19,8 +19,8 @@ This library also implements the `TypeBuilder` class that parses the TypeLanguag
 in [JSON format](https://core.telegram.org/schema/mtproto-json) and dynamically writes **Type classes and functions** in
 pure javascript.
 
-The [**telegram.link**](http://telegram.link) <img src="https://raw.githubusercontent.com/enricostara/telegram.link/master/telegram.link.png" 
-width="25" /> main project has a dependency on this library.
+<img src="https://raw.githubusercontent.com/enricostara/telegram.link/master/telegram.link.png" 
+    width="20" /> [**telegram.link**](http://telegram.link)  main project has a dependency by this library.
 
 ## Installation
 
@@ -35,6 +35,13 @@ $ npm install
 ```bash
 $ npm test
 ```
+
+## Dependencies
+
+- [get-log](https://github.com/enricostara/get-log): a Node.js Logging Utility, easy to use and ready for production.
+
+- [jsbn](https://github.com/enricostara/get-log): a portable implementation of large-number math in pure JavaScript, 
+enabling public-key crypto and other applications on desktop and mobile browsers.
 
 ## License
 
