@@ -32,9 +32,7 @@
         "mocha-better-spec-reporter": "latest",
         "mocha-lcov-reporter": "latest",
         "coveralls": "latest",
-        "codeclimate-test-reporter": "latest",
-        "istanbul": "latest",
-        "zuul": "latest"
+        "codeclimate-test-reporter": "latest"
     },
     "main": "index",
     "engines": {
