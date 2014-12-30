@@ -11,9 +11,10 @@ describe('TypeBuilder', function () {
         };
         this.deserialize = function () {
             return {
-                getMessage: function () {
-                    return param.buffer;
-                }
+                body: param.buffer
+                //getMessage: function () {
+                //    return param.buffer;
+                //}
             };
         };
     }
