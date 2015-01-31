@@ -3,32 +3,20 @@ var TypeBuilder = require('../lib/type-builder');
 var TypeObject = require('../lib/type-object');
 var TypeVector = require('../lib/type-vector');
 
-describe('TypeBuilder', function () {
+describe('TypeBuilder', function() {
 
-    function WrapperMessage(param) {
-        this.serialize = function () {
-            return param.message;
-        };
-        this.deserialize = function () {
-            return {
-                body: param.buffer
-                //getMessage: function () {
-                //    return param.buffer;
-                //}
-            };
-        };
-    }
-
-    describe('#buildTypeConstructor({P_Q_inner_data})', function () {
-        it('should return a P_Q_inner_data', function (done) {
-            var P_Q_inner_data = new TypeBuilder('namespace', {"id": "-2083955988", "predicate": "p_q_inner_data", "params": [
-                {"name": "pq", "type": "bytes"},
-                {"name": "p", "type": "bytes"},
-                {"name": "q", "type": "bytes"},
-                {"name": "nonce", "type": "int128"},
-                {"name": "server_nonce", "type": "int128"},
-                {"name": "new_nonce", "type": "int256"}
-            ], "type": "P_Q_inner_data"}).getType();
+    describe('#buildTypeConstructor({P_Q_inner_data})', function() {
+        it('should return a P_Q_inner_data', function(done) {
+            var P_Q_inner_data = new TypeBuilder('namespace', {
+                "id": "-2083955988", "predicate": "p_q_inner_data", "params": [
+                    {"name": "pq", "type": "bytes"},
+                    {"name": "p", "type": "bytes"},
+                    {"name": "q", "type": "bytes"},
+                    {"name": "nonce", "type": "int128"},
+                    {"name": "server_nonce", "type": "int128"},
+                    {"name": "new_nonce", "type": "int256"}
+                ], "type": "P_Q_inner_data"
+            }).getType();
             P_Q_inner_data.should.be.an.instanceof(Function);
             var obj = new P_Q_inner_data();
             obj.should.be.an.instanceof(P_Q_inner_data);
@@ -39,18 +27,22 @@ describe('TypeBuilder', function () {
         })
     });
 
-    describe('#buildTypeConstructor({ResPQ}).deserialize()', function () {
-        it('should build and de-serialize an instance of ResPQ', function (done) {
-            var ResPQ = new TypeBuilder('namespace', {"id": "85337187", "predicate": "resPQ", "params": [
-                {"name": "nonce", "type": "int128"},
-                {"name": "server_nonce", "type": "int128"},
-                {"name": "pq", "type": "bytes"},
-                {"name": "server_public_key_fingerprints", "type": "Vector<long>"}
-            ], "type": "ResPQ"}).getType();
+    describe('#buildTypeConstructor({ResPQ}).deserialize()', function() {
+        it('should build and de-serialize an instance of ResPQ', function(done) {
+            var ResPQ = new TypeBuilder('namespace', {
+                "id": "85337187", "predicate": "resPQ", "params": [
+                    {"name": "nonce", "type": "int128"},
+                    {"name": "server_nonce", "type": "int128"},
+                    {"name": "pq", "type": "bytes"},
+                    {"name": "server_public_key_fingerprints", "type": "Vector<long>"}
+                ], "type": "ResPQ"
+            }).getType();
             ResPQ.should.be.an.instanceof(Function);
-            var obj = new ResPQ({buffer: new Buffer(
-                '632416053E0549828CCA27E966B301A48FECE2FCA5CF4D33F4A11EA877BA4AA5739073300817ED48941A08F98100000015C4B51C01000000216BE86C022BB4C3',
-                'hex')});
+            var obj = new ResPQ({
+                buffer: new Buffer(
+                    '632416053E0549828CCA27E966B301A48FECE2FCA5CF4D33F4A11EA877BA4AA5739073300817ED48941A08F98100000015C4B51C01000000216BE86C022BB4C3',
+                    'hex')
+            });
             obj.should.be.an.instanceof(ResPQ);
             obj.should.be.an.instanceof(TypeObject);
             obj.deserialize();
@@ -69,21 +61,24 @@ describe('TypeBuilder', function () {
         })
     });
 
-    describe('#buildTypeConstructor({ResPQ}).serialize()', function () {
-        it('should build and serialize an instance of ResPQ', function (done) {
-            var ResPQ = new TypeBuilder('namespace', {"id": "85337187", "predicate": "resPQ", "params": [
-                {"name": "nonce", "type": "int128"},
-                {"name": "server_nonce", "type": "int128"},
-                {"name": "pq", "type": "bytes"},
-                {"name": "server_public_key_fingerprints", "type": "Vector<long>"}
-            ], "type": "ResPQ"}).getType();
+    describe('#buildTypeConstructor({ResPQ}).serialize()', function() {
+        it('should build and serialize an instance of ResPQ', function(done) {
+            var ResPQ = new TypeBuilder('namespace', {
+                "id": "85337187", "predicate": "resPQ", "params": [
+                    {"name": "nonce", "type": "int128"},
+                    {"name": "server_nonce", "type": "int128"},
+                    {"name": "pq", "type": "bytes"},
+                    {"name": "server_public_key_fingerprints", "type": "Vector<long>"}
+                ], "type": "ResPQ"
+            }).getType();
             ResPQ.should.be.an.instanceof(Function);
-            var obj = new ResPQ({props: {
-                nonce: '0xfce2ec8fa401b366e927ca8c8249053e',
-                server_nonce: '0x30739073a54aba77a81ea1f4334dcfa5',
-                pq: new Buffer('17ed48941a08f981', 'hex'),
-                server_public_key_fingerprints: new TypeVector({type: 'long', list: ['0xc3b42b026ce86b21']})
-            }
+            var obj = new ResPQ({
+                props: {
+                    nonce: '0xfce2ec8fa401b366e927ca8c8249053e',
+                    server_nonce: '0x30739073a54aba77a81ea1f4334dcfa5',
+                    pq: new Buffer('17ed48941a08f981', 'hex'),
+                    server_public_key_fingerprints: new TypeVector({type: 'long', list: ['0xc3b42b026ce86b21']})
+                }
             });
             var objBuffer = obj.serialize();
             objBuffer.toString('hex').toUpperCase().should.be.
@@ -94,31 +89,26 @@ describe('TypeBuilder', function () {
         })
     });
 
-    describe('#buildTypeFunction({reqPQ}).serialize()', function () {
-        it('should build a reqPQ Type function', function (done) {
-            var reqPQ = new TypeBuilder('namespace', {"id": "1615239032", "method": "req_pq", "params": [
-                {"name": "nonce", "type": "int128"}
-            ], "type": "ResPQ"}, WrapperMessage).getType();
+    describe('#buildTypeFunction({reqPQ}).serialize()', function() {
+        it('should build a reqPQ Type function', function(done) {
+            var reqPQ = new TypeBuilder('namespace', {
+                "id": "1615239032", "method": "req_pq", "params": [
+                    {"name": "nonce", "type": "int128"}
+                ], "type": "ResPQ"
+            }, true).getType();
             reqPQ.should.be.an.instanceof(Function);
             var nonce = '0xf67b7768bf4854bb15fa840ec843875f';
-            var conn = {
-                connect: function (callback) {
-                    callback();
-                },
-                write: function (buffer, callback) {
-                    this.buffer = buffer;
-                    callback();
-                },
-                read: function (callback) {
-                    callback(null, this.buffer);
+            var channel = {
+                callMethod: function(buffer, callback) {
+                    callback(null, buffer);
                 }
             };
             reqPQ({
                 props: {
                     nonce: nonce
                 },
-                conn: conn,
-                callback: function (ex, response) {
+                channel: channel,
+                callback: function(ex, response) {
                     if (ex) console.warn(ex);
                     response.nonce.should.be.eql(nonce);
                     done();
@@ -127,57 +117,46 @@ describe('TypeBuilder', function () {
         })
     });
 
-    describe('#buildTypes()', function () {
-        it('should build both types and functions', function () {
+    describe('#buildTypes()', function() {
+        it('should build both types and functions', function() {
             var api = {
-                "constructors": [
-                    {
-                        "id": "85337187",
-                        "predicate": "resPQ",
-                        "params": [
-                            {
-                                "name": "nonce",
-                                "type": "int128"
-                            },
-                            {
-                                "name": "server_nonce",
-                                "type": "int128"
-                            },
-                            {
-                                "name": "pq",
-                                "type": "bytes"
-                            },
-                            {
-                                "name": "server_public_key_fingerprints",
-                                "type": "Vector<long>"
-                            }
-                        ],
-                        "type": "ResPQ"
-                    }
-                ],
-                "methods": [
-                    {
-                        "id": "1615239032",
-                        "method": "req_pq",
-                        "params": [
-                            {
-                                "name": "nonce",
-                                "type": "int128"
-                            }
-                        ],
-                        "type": "ResPQ"
-                    }
-                ]
+                "constructors": [{
+                    "id": "85337187",
+                    "predicate": "resPQ",
+                    "params": [{
+                        "name": "nonce",
+                        "type": "int128"
+                    }, {
+                        "name": "server_nonce",
+                        "type": "int128"
+                    }, {
+                        "name": "pq",
+                        "type": "bytes"
+                    }, {
+                        "name": "server_public_key_fingerprints",
+                        "type": "Vector<long>"
+                    }],
+                    "type": "ResPQ"
+                }],
+                "methods": [{
+                    "id": "1615239032",
+                    "method": "req_pq",
+                    "params": [{
+                        "name": "nonce",
+                        "type": "int128"
+                    }],
+                    "type": "ResPQ"
+                }]
             };
-            var type = { _id: 'type'};
+            var type = {_id: 'type'};
             var constructors = ['ResPQ'];
             TypeBuilder.buildTypes(api.constructors, constructors, type);
             type.should.be.ok;
             type.should.have.properties(['ResPQ']);
 
-            var service = { _id: 'service'};
+            var service = {_id: 'service'};
             var methods = ['req_pq'];
-            TypeBuilder.buildTypes(api.methods, methods, service, WrapperMessage);
+            TypeBuilder.buildTypes(api.methods, methods, service, true);
             service.should.be.ok;
             service.should.have.properties(['req_pq']);
         })
