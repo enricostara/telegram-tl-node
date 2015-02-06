@@ -96,21 +96,50 @@ describe('TypeBuilder', function() {
                     {"name": "nonce", "type": "int128"}
                 ], "type": "ResPQ"
             }, true).getType();
+            var invokeWithLayer =  new TypeBuilder('namespace', {
+                "id": "-627372787",
+                "method": "invokeWithLayer",
+                "params": [{
+                    "name": "layer",
+                    "type": "int"
+                }, {
+                    "name": "query",
+                    "type": "!X"
+                }],
+                "type": "X"
+            }, true).getType();
             reqPQ.should.be.an.instanceof(Function);
+            reqPQ.Type.should.be.an.instanceof(Function);
+            invokeWithLayer.should.be.an.instanceof(Function);
             var nonce = '0xf67b7768bf4854bb15fa840ec843875f';
             var channel = {
-                callMethod: function(buffer, callback) {
-                    callback(null, buffer);
+                callMethod: function(method, callback) {
+                    var buffer = method.serialize();
+                    var Type = TypeBuilder.requireTypeFromBuffer(buffer);
+                    var resObj = new Type({buffer: buffer});
+                    var response = resObj.deserialize();
+                    callback(null, response);
                 }
             };
-            reqPQ({
+            var query = new reqPQ.Type({
                 props: {
                     nonce: nonce
+                }
+            });
+            query.should.be.ok;
+            query.should.be.an.instanceof(TypeObject);
+            query.nonce.should.be.eql(nonce);
+
+            invokeWithLayer({
+                props: {
+                    layer: 23,
+                    query: query.serialize()
                 },
                 channel: channel,
                 callback: function(ex, response) {
                     if (ex) console.warn(ex);
-                    response.nonce.should.be.eql(nonce);
+                    var resPQ = new reqPQ.Type({buffer: response.query}).deserialize();
+                    resPQ.nonce.should.be.eql(nonce);
                     done();
                 }
             });
