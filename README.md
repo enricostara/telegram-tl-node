@@ -20,7 +20,7 @@ in [JSON format](https://core.telegram.org/schema/mtproto-json) and dynamically 
 pure javascript.
 
 <img src="https://raw.githubusercontent.com/enricostara/telegram.link/master/telegram.link.png" 
-    width="20" /> [**telegram.link**](http://telegram.link)  main project has a dependency by this library.
+    width="20" /> [**telegram.link**](http://telegram.link)  main project depends by this library.
 
 ## Installation
 
