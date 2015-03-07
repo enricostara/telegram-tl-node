@@ -1,11 +1,12 @@
 require('should');
 var TypeVector = require('../lib/type-vector');
 var TypeObject = require('../lib/type-object');
+var TypeBuilder = require('../lib/type-builder');
 
-describe('TypeVector', function () {
+describe('TypeVector', function() {
 
-    describe('#init()', function () {
-        it('should return an instance', function (done) {
+    describe('#init()', function() {
+        it('should return an instance', function(done) {
             var list = new TypeVector();
             list.should.be.ok;
             list.should.be.an.instanceof(TypeVector);
@@ -17,17 +18,17 @@ describe('TypeVector', function () {
             list.should.have.properties({id: '15c4b51c', type: 'Long'});
             list.isReadonly().should.be.true;
 
-            var list = new TypeVector({type: 'long', list: [1,2,3]});
+            var list = new TypeVector({type: 'long', list: [1, 2, 3]});
             list.should.have.properties({id: '15c4b51c', type: 'Long'});
             list.isReadonly().should.be.false;
-            list.getList().should.be.eql([1,2,3]);
+            list.getList().should.be.eql([1, 2, 3]);
 
             done();
         })
     });
 
-    describe('#deserialize()', function () {
-        it('should de-serialize the list', function (done) {
+    describe('#deserialize()', function() {
+        it('should de-serialize the list', function(done) {
             var list = new TypeVector({type: 'long', buffer: new Buffer('15C4B51C01000000216BE86C022BB4C3', 'hex')});
             list.deserialize().should.be.ok;
             list.getList().length.should.be.equal(1);
@@ -36,22 +37,77 @@ describe('TypeVector', function () {
         })
     });
 
-    describe('#deserialize()', function () {
-        it('should not de-serialize the list cause type id mismatch', function (done) {
+    describe('#deserialize()', function() {
+        it('should not de-serialize the list cause type id mismatch', function(done) {
             var list = new TypeVector({type: 'long', buffer: new Buffer('25C4B51C01000000216BE86C022BB4C3', 'hex')});
             list.deserialize().should.not.be.ok;
             done();
         })
     });
 
-    describe('#serialize()', function () {
-        it('should serialize the list', function (done) {
+    describe('#serialize()', function() {
+        it('should serialize the list', function(done) {
             var list = new TypeVector({type: 'long', list: ['0xc3b42b026ce86b21']});
-            var buffer =  list.serialize();
+            var buffer = list.serialize();
             buffer.should.be.ok;
             buffer.toString('hex').should.be.equal('15c4b51c01000000216be86c022bb4c3');
             done();
         })
     });
 
+
+    var Message = new TypeBuilder('namespace', {
+        "id": "1538843921",
+        "predicate": "message",
+        "params": [{
+            "name": "msg_id",
+            "type": "long"
+        }, {
+            "name": "seqno",
+            "type": "int"
+        }, {
+            "name": "bytes",
+            "type": "int"
+        }, {
+            "name": "body",
+            "type": "Object"
+        }],
+        "type": "Message"
+    }).getType();
+
+
+    describe('#serialize()', function() {
+        it('should serialize the list with a bare Message ', function(done) {
+            var message = new Message({
+                props: {
+                    msg_id: '1',
+                    seqno: 1,
+                    bytes: 2,
+                    body: new Buffer('ffff', 'hex')
+                }
+            });
+            var list = new TypeVector({type: '%Message', list: [message]});
+            var buffer = list.serialize();
+            buffer.should.be.ok;
+            buffer.toString('hex').should.be.equal('15c4b51c0100000001000000000000000100000002000000ffff');
+            done();
+        })
+    });
+
+    describe('#deserialize()', function() {
+        it('should de-serialize the list with a bare Message', function(done) {
+            var list = new TypeVector({type: '%Message', buffer: new Buffer('15c4b51c0100000001000000000000000100000002000000ffff', 'hex')});
+            list.deserialize().should.be.ok;
+            list.getList().length.should.be.equal(1);
+
+            var message = list.getList().pop();
+            message.should.have.properties({
+                msg_id: '0x0000000000000001',
+                seqno: 1,
+                bytes: 2
+            });
+            message.body.toString('hex').should.be.equal('ffff');
+            done();
+        })
+    });
 });
