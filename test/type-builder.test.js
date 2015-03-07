@@ -190,5 +190,114 @@ describe('TypeBuilder', function() {
             service.should.have.properties(['req_pq']);
         })
     });
+
+
+
+    describe('compositeType', function() {
+
+        var Message = new TypeBuilder('namespace', {
+            "id": "1538843921",
+            "predicate": "message",
+            "params": [{
+                "name": "msg_id",
+                "type": "long"
+            }, {
+                "name": "seqno",
+                "type": "int"
+            }, {
+                "name": "bytes",
+                "type": "int"
+            }, {
+                "name": "body",
+                "type": "Object"
+            }],
+            "type": "Message"
+        }).getType();
+
+        var ModelType = new TypeBuilder('namespace', {
+            "predicate": "modelType",
+            "params": [
+                {
+                    "name": "server_salt",
+                    "type": "long"
+                }, {
+                    "name": "session_id",
+                    "type": "long"
+                }, {
+                    "name": "payload",
+                    "type": "%Message"
+                }
+            ],
+            "type": "ModelType"
+        }).getType();
+
+        var model = {
+            props: {
+                server_salt: '0xfce2ec8fa401b366',
+                session_id: '0x77907373a54aba77',
+                payload: new Message({
+                    props: {
+                        msg_id: '0x84739073a54aba84',
+                        seqno: 0,
+                        bytes: 2,
+                        body: new Buffer('FFFF', 'hex')
+                    }
+                })
+            }
+        };
+
+        describe('#init()', function() {
+            it('should return an instance', function(done) {
+                var msg = new ModelType();
+                msg.should.be.ok;
+                msg.should.be.an.instanceof(ModelType);
+                msg.should.be.an.instanceof(TypeObject);
+                msg.isReadonly().should.be.false;
+
+                msg = new ModelType(model);
+                msg.should.be.an.instanceof(ModelType);
+                msg.should.have.properties({
+                    server_salt: '0xfce2ec8fa401b366',
+                    session_id: '0x77907373a54aba77'
+                });
+                msg.payload.should.be.an.instanceof(Message);
+                msg.payload.bytes.should.be.equal(2);
+                msg.payload.body.toString('hex').should.equal('ffff');
+                done();
+            })
+        });
+
+        describe('#serialize()', function() {
+            it('should serialize the msg', function(done) {
+                var msg = new ModelType(model);
+                var buffer = msg.serialize();
+                buffer.should.be.ok;
+                buffer.toString('hex').should.be.equal('66b301a48fece2fc77ba4aa57373907784ba4aa5739073840000000002000000ffff');
+                done();
+            })
+        });
+
+        describe('#deserialize()', function() {
+            it('should de-serialize the msg', function(done) {
+                var msg = new ModelType({
+                    buffer: new Buffer('66b301a48fece2fc77ba4aa57373907784ba4aa5739073840000000002000000ffff', 'hex')
+                });
+                msg.deserialize().should.be.ok;
+                msg.should.be.an.instanceof(ModelType);
+                msg.should.have.properties({
+                    server_salt: '0xfce2ec8fa401b366',
+                    session_id: '0x77907373a54aba77'
+                });
+                msg.payload.should.be.an.instanceof(TypeBuilder.requireTypeByName('Message'));
+                msg.payload.bytes.should.be.equal(2);
+                msg.payload.body.toString('hex').should.equal('ffff');
+                done();
+            })
+        });
+    });
+
+
+
+
 });
 
