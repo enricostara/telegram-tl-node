@@ -20,6 +20,7 @@
     },
     "license": "MIT",
     "dependencies": {
+        "colors": "latest",
         "get-log": "latest",
         "jsbn": "latest"
     },
