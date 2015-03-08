@@ -6,3 +6,4 @@
 exports.TypeBuilder = require('./lib/type-builder');
 exports.TypeObject = require('./lib/type-object');
 exports.TypeVector = require('./lib/type-vector');
+exports.utility = require('./lib/utility');
