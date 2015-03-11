@@ -75,6 +75,17 @@ describe('TypeVector', function() {
         "type": "Message"
     }).getType();
 
+    var Body2 = new TypeBuilder('namespace', {
+        "id": "66667",
+        "predicate": "Body2",
+        "params": [
+            {
+                "name": "key",
+                "type": "int"
+            }
+        ],
+        "type": "Body2"
+    }).getType();
 
     describe('#serialize()', function() {
         it('should serialize the list with a bare Message ', function(done) {
@@ -83,20 +94,24 @@ describe('TypeVector', function() {
                     msg_id: '1',
                     seqno: 1,
                     bytes: 2,
-                    body: new Buffer('ffff', 'hex')
+                    body: new Body2({
+                        props: {
+                            key: 6666
+                        }
+                    })
                 }
             });
             var list = new TypeVector({type: '%Message', list: [message]});
             var buffer = list.serialize();
             buffer.should.be.ok;
-            buffer.toString('hex').should.be.equal('15c4b51c0100000001000000000000000100000002000000ffff');
+            buffer.toString('hex').should.be.equal('15c4b51c01000000010000000000000001000000020000006b0401000a1a0000');
             done();
         })
     });
 
     describe('#deserialize()', function() {
         it('should de-serialize the list with a bare Message', function(done) {
-            var list = new TypeVector({type: '%Message', buffer: new Buffer('15c4b51c0100000001000000000000000100000002000000ffff', 'hex')});
+            var list = new TypeVector({type: '%Message', buffer: new Buffer('15c4b51c01000000010000000000000001000000020000006b0401000a1a0000', 'hex')});
             list.deserialize().should.be.ok;
             list.getList().length.should.be.equal(1);
 
@@ -106,7 +121,7 @@ describe('TypeVector', function() {
                 seqno: 1,
                 bytes: 2
             });
-            message.body.toString('hex').should.be.equal('ffff');
+            message.body.key.should.be.equal(6666);
             done();
         })
     });
