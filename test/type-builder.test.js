@@ -251,7 +251,7 @@ describe('TypeBuilder', function() {
                     props: {
                         msg_id: '0x84739073a54aba84',
                         seqno: 0,
-                        bytes: 2,
+                        bytes: 8,
                         body: new Body({
                             props: {
                                 key: 6666
@@ -277,7 +277,7 @@ describe('TypeBuilder', function() {
                     session_id: '0x77907373a54aba77'
                 });
                 msg.payload.should.be.an.instanceof(Message);
-                msg.payload.bytes.should.be.equal(2);
+                msg.payload.bytes.should.be.equal(8);
                 msg.payload.body.should.be.an.instanceof(Body);
                 msg.payload.body.key.should.be.equal(6666);
                 done();
@@ -289,7 +289,7 @@ describe('TypeBuilder', function() {
                 var msg = new ModelType(model);
                 var buffer = msg.serialize();
                 buffer.should.be.ok;
-                buffer.toString('hex').should.be.equal('66b301a48fece2fc77ba4aa57373907784ba4aa57390738400000000020000006a0401000a1a0000');
+                buffer.toString('hex').should.be.equal('66b301a48fece2fc77ba4aa57373907784ba4aa57390738400000000080000006a0401000a1a0000');
                 done();
             })
         });
@@ -297,7 +297,7 @@ describe('TypeBuilder', function() {
         describe('#deserialize()', function() {
             it('should de-serialize the msg', function(done) {
                 var msg = new ModelType({
-                    buffer: new Buffer('66b301a48fece2fc77ba4aa57373907784ba4aa57390738400000000020000006a0401000a1a0000', 'hex')
+                    buffer: new Buffer('66b301a48fece2fc77ba4aa57373907784ba4aa57390738400000000080000006a0401000a1a0000', 'hex')
                 });
                 msg.deserialize().should.be.ok;
                 msg.should.be.an.instanceof(ModelType);
@@ -306,7 +306,7 @@ describe('TypeBuilder', function() {
                     session_id: '0x77907373a54aba77'
                 });
                 msg.payload.should.be.an.instanceof(TypeBuilder.requireTypeByName('Message'));
-                msg.payload.bytes.should.be.equal(2);
+                msg.payload.bytes.should.be.equal(8);
                 msg.payload.body.should.be.an.instanceof(Body);
                 msg.payload.body.key.should.be.equal(6666);
                 done();

@@ -93,7 +93,6 @@ describe('TypeVector', function() {
                 props: {
                     msg_id: '1',
                     seqno: 1,
-                    bytes: 2,
                     body: new Body2({
                         props: {
                             key: 6666
@@ -104,14 +103,14 @@ describe('TypeVector', function() {
             var list = new TypeVector({type: '%Message', list: [message]});
             var buffer = list.serialize();
             buffer.should.be.ok;
-            buffer.toString('hex').should.be.equal('15c4b51c01000000010000000000000001000000020000006b0401000a1a0000');
+            buffer.toString('hex').should.be.equal('15c4b51c01000000010000000000000001000000080000006b0401000a1a0000');
             done();
         })
     });
 
     describe('#deserialize()', function() {
         it('should de-serialize the list with a bare Message', function(done) {
-            var list = new TypeVector({type: '%Message', buffer: new Buffer('15c4b51c01000000010000000000000001000000020000006b0401000a1a0000', 'hex')});
+            var list = new TypeVector({type: '%Message', buffer: new Buffer('15c4b51c01000000010000000000000001000000080000006b0401000a1a0000', 'hex')});
             list.deserialize().should.be.ok;
             list.getList().length.should.be.equal(1);
 
@@ -119,7 +118,7 @@ describe('TypeVector', function() {
             message.should.have.properties({
                 msg_id: '0x0000000000000001',
                 seqno: 1,
-                bytes: 2
+                bytes: 8
             });
             message.body.key.should.be.equal(6666);
             done();
