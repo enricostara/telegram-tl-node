@@ -55,7 +55,7 @@ describe('TypeBuilder', function() {
             obj.server_public_key_fingerprints.should.have.properties({
                 id: '15c4b51c',
                 type: 'Long',
-                _list: ['0xc3b42b026ce86b21']
+                list: ['0xc3b42b026ce86b21']
             });
             done();
         })
