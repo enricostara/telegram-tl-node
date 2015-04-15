@@ -1,18 +1,18 @@
 require('should');
 var TypeObject = require('../lib/type-object');
 
-describe('TypeObject', function() {
+describe('TypeObject', function () {
 
-    describe('#init()', function() {
-        it('should create a TypeObject instance', function(done) {
+    describe('#init()', function () {
+        it('should create a TypeObject instance', function (done) {
             var obj = new TypeObject();
             obj.should.be.ok;
             done();
         })
     });
 
-    describe('#retrieveBuffer()', function() {
-        it('should retrieve the buffer and put object in readonly', function(done) {
+    describe('#retrieveBuffer()', function () {
+        it('should retrieve the buffer and put object in readonly', function (done) {
             var obj = new TypeObject();
             obj.isReadonly().should.be.false;
             obj.retrieveBuffer();
@@ -21,8 +21,8 @@ describe('TypeObject', function() {
         })
     });
 
-    describe('#writeInt()', function() {
-        it('should write an int value', function(done) {
+    describe('#writeInt()', function () {
+        it('should write an int value', function (done) {
             var obj = new TypeObject();
             obj.writeInt(0x80a0c0e0).should.be.true;
             var bytes = obj.retrieveBuffer();
@@ -39,8 +39,8 @@ describe('TypeObject', function() {
         })
     });
 
-    describe('#_writeBigInt()', function() {
-        it('should write a big int value', function(done) {
+    describe('#_writeBigInt()', function () {
+        it('should write a big int value', function (done) {
             var obj = new TypeObject();
             obj._writeBigInt('1', 4).should.be.true;
             var bytes = obj.retrieveBuffer();
@@ -92,8 +92,8 @@ describe('TypeObject', function() {
         })
     });
 
-    describe('#writeInt256', function() {
-        it('should write an  int256 value ', function(done) {
+    describe('#writeInt256', function () {
+        it('should write an  int256 value ', function (done) {
             var obj = new TypeObject();
             obj.writeInt256('0xffeeddccbbaa99887766554433221100ffeeddccbbaa99887766554433221100').should.be.true;
             var bytes = obj.retrieveBuffer();
@@ -104,8 +104,8 @@ describe('TypeObject', function() {
     });
 
 
-    describe('#writeBytes()', function() {
-        it('should write few bytes', function(done) {
+    describe('#writeBytes()', function () {
+        it('should write few bytes', function (done) {
             var obj = new TypeObject();
             obj.writeBytes(new Buffer('130c81d08c748257', 'hex')).should.be.true;
             var bytes = obj.retrieveBuffer();
@@ -115,8 +115,8 @@ describe('TypeObject', function() {
         })
     });
 
-    describe('#writeBytes()', function() {
-        it('should write a lot of bytes', function(done) {
+    describe('#writeBytes()', function () {
+        it('should write a lot of bytes', function (done) {
             var obj = new TypeObject();
             var buffer = new Buffer(605);
             buffer.fill(254);
@@ -126,8 +126,8 @@ describe('TypeObject', function() {
             done();
         })
     });
-    describe('#writeString()', function() {
-        it('should write a string', function(done) {
+    describe('#writeString()', function () {
+        it('should write a string', function (done) {
             var obj = new TypeObject();
             obj.writeString('Lorem ipsum dolor sit amet, consectetur adipisci elit, ' +
             'sed eiusmod tempor incidunt ut labore et dolore magna aliqua.').should.be.true;
@@ -140,8 +140,8 @@ describe('TypeObject', function() {
         })
     });
 
-    describe('#readInt()', function() {
-        it('should read an int value', function(done) {
+    describe('#readInt()', function () {
+        it('should read an int value', function (done) {
             var obj = new TypeObject(new Buffer('feffffff', 'hex'));
             var intValue = obj.readInt();
             intValue.should.be.equal(4294967294);
@@ -150,8 +150,8 @@ describe('TypeObject', function() {
         })
     });
 
-    describe('#_readBigInt()', function() {
-        it('should read a big int value', function(done) {
+    describe('#_readBigInt()', function () {
+        it('should read a big int value', function (done) {
             var obj = new TypeObject(new Buffer('8899aabbccddeeff', 'hex'));
             var bigintValue = obj._readBigInt(8);
             bigintValue.should.be.equal('0xffeeddccbbaa9988');
@@ -160,8 +160,8 @@ describe('TypeObject', function() {
         })
     });
 
-    describe('#readInt256()', function() {
-        it('should read an int256 value', function(done) {
+    describe('#readInt256()', function () {
+        it('should read an int256 value', function (done) {
             var obj = new TypeObject(new Buffer('00112233445566778899aabbccddeeff00112233445566778899aabbccddeeff', 'hex'));
             var intValue = obj.readInt256();
             intValue.should.be.eql('0xffeeddccbbaa99887766554433221100ffeeddccbbaa99887766554433221100');
@@ -171,8 +171,8 @@ describe('TypeObject', function() {
     });
 
 
-    describe('#readBytes()', function() {
-        it('should read few bytes', function(done) {
+    describe('#readBytes()', function () {
+        it('should read few bytes', function (done) {
             var obj = new TypeObject(new Buffer('08130c81d08c748257000000', 'hex'));
             var bytes = obj.readBytes();
             bytes.toString('hex').should.be.eql('130c81d08c748257');
@@ -181,8 +181,8 @@ describe('TypeObject', function() {
         })
     });
 
-    describe('#readBytes()', function() {
-        it('should read a lot of bytes', function(done) {
+    describe('#readBytes()', function () {
+        it('should read a lot of bytes', function (done) {
 
             var buffers = [];
             buffers.push(new Buffer('7f5d0200', 'hex'));
@@ -201,8 +201,8 @@ describe('TypeObject', function() {
         })
     });
 
-    describe('#readString()', function() {
-        it('should read a string', function(done) {
+    describe('#readString()', function () {
+        it('should read a string', function (done) {
             var obj = new TypeObject(new Buffer('744c6f72656d20697073756d20646f6c6f722073697420616d65742c20636f6' +
             'e736563746574757220616469706973636920656c69742c2073656420656975736d6f642074656d706f7220696e6369647' +
             '56e74207574206c61626f726520657420646f6c6f7265206d61676e6120616c697175612e000000', 'hex'));

@@ -3,10 +3,10 @@ var TypeVector = require('../lib/type-vector');
 var TypeObject = require('../lib/type-object');
 var TypeBuilder = require('../lib/type-builder');
 
-describe('TypeVector', function() {
+describe('TypeVector', function () {
 
-    describe('#init()', function() {
-        it('should return an instance', function(done) {
+    describe('#init()', function () {
+        it('should return an instance', function (done) {
             var list = new TypeVector();
             list.should.be.ok;
             list.should.be.an.instanceof(TypeVector);
@@ -27,8 +27,8 @@ describe('TypeVector', function() {
         })
     });
 
-    describe('#deserialize()', function() {
-        it('should de-serialize the list', function(done) {
+    describe('#deserialize()', function () {
+        it('should de-serialize the list', function (done) {
             var list = new TypeVector({type: 'long', buffer: new Buffer('15C4B51C01000000216BE86C022BB4C3', 'hex')});
             list.deserialize().should.be.ok;
             list.getList().length.should.be.equal(1);
@@ -37,16 +37,16 @@ describe('TypeVector', function() {
         })
     });
 
-    describe('#deserialize()', function() {
-        it('should not de-serialize the list cause type id mismatch', function(done) {
+    describe('#deserialize()', function () {
+        it('should not de-serialize the list cause type id mismatch', function (done) {
             var list = new TypeVector({type: 'long', buffer: new Buffer('25C4B51C01000000216BE86C022BB4C3', 'hex')});
             list.deserialize().should.not.be.ok;
             done();
         })
     });
 
-    describe('#serialize()', function() {
-        it('should serialize the list', function(done) {
+    describe('#serialize()', function () {
+        it('should serialize the list', function (done) {
             var list = new TypeVector({type: 'long', list: ['0xc3b42b026ce86b21']});
             var buffer = list.serialize();
             buffer.should.be.ok;
@@ -87,8 +87,8 @@ describe('TypeVector', function() {
         "type": "Body"
     }).getType();
 
-    describe('#serialize()', function() {
-        it('should serialize the list with a bare Message ', function(done) {
+    describe('#serialize()', function () {
+        it('should serialize the list with a bare Message ', function (done) {
             var message1 = new Message({
                 props: {
                     msg_id: '1',
@@ -119,9 +119,12 @@ describe('TypeVector', function() {
         })
     });
 
-    describe('#deserialize()', function() {
-        it('should de-serialize the list with a bare Message', function(done) {
-            var list = new TypeVector({type: '%Message', buffer: new Buffer('15c4b51c02000000010000000000000001000000080000006b0401000a1a0000020000000000000003000000080000006b040100611e0000', 'hex')});
+    describe('#deserialize()', function () {
+        it('should de-serialize the list with a bare Message', function (done) {
+            var list = new TypeVector({
+                type: '%Message',
+                buffer: new Buffer('15c4b51c02000000010000000000000001000000080000006b0401000a1a0000020000000000000003000000080000006b040100611e0000', 'hex')
+            });
             list.deserialize().should.be.ok;
             list.getList().length.should.be.equal(2);
 

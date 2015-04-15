@@ -3,10 +3,10 @@ var TypeBuilder = require('../lib/type-builder');
 var TypeObject = require('../lib/type-object');
 var TypeVector = require('../lib/type-vector');
 
-describe('TypeBuilder', function() {
+describe('TypeBuilder', function () {
 
-    describe('#buildTypeConstructor({P_Q_inner_data})', function() {
-        it('should return a P_Q_inner_data', function(done) {
+    describe('#buildTypeConstructor({P_Q_inner_data})', function () {
+        it('should return a P_Q_inner_data', function (done) {
             var P_Q_inner_data = new TypeBuilder('namespace', {
                 "id": "-2083955988", "predicate": "p_q_inner_data", "params": [
                     {"name": "pq", "type": "bytes"},
@@ -27,8 +27,8 @@ describe('TypeBuilder', function() {
         })
     });
 
-    describe('#buildTypeConstructor({ResPQ}).deserialize()', function() {
-        it('should build and de-serialize an instance of ResPQ', function(done) {
+    describe('#buildTypeConstructor({ResPQ}).deserialize()', function () {
+        it('should build and de-serialize an instance of ResPQ', function (done) {
             var ResPQ = new TypeBuilder('namespace', {
                 "id": "85337187", "predicate": "resPQ", "params": [
                     {"name": "nonce", "type": "int128"},
@@ -61,8 +61,8 @@ describe('TypeBuilder', function() {
         })
     });
 
-    describe('#buildTypeConstructor({ResPQ}).serialize()', function() {
-        it('should build and serialize an instance of ResPQ', function(done) {
+    describe('#buildTypeConstructor({ResPQ}).serialize()', function () {
+        it('should build and serialize an instance of ResPQ', function (done) {
             var ResPQ = new TypeBuilder('namespace', {
                 "id": "85337187", "predicate": "resPQ", "params": [
                     {"name": "nonce", "type": "int128"},
@@ -89,14 +89,14 @@ describe('TypeBuilder', function() {
         })
     });
 
-    describe('#buildTypeFunction({reqPQ}).serialize()', function() {
-        it('should build a reqPQ Type function', function(done) {
+    describe('#buildTypeFunction({reqPQ}).serialize()', function () {
+        it('should build a reqPQ Type function', function (done) {
             var reqPQ = new TypeBuilder('namespace', {
                 "id": "1615239032", "method": "req_pq", "params": [
                     {"name": "nonce", "type": "int128"}
                 ], "type": "ResPQ"
             }, true).getType();
-            var invokeWithLayer =  new TypeBuilder('namespace', {
+            var invokeWithLayer = new TypeBuilder('namespace', {
                 "id": "-627372787",
                 "method": "invokeWithLayer",
                 "params": [{
@@ -113,7 +113,7 @@ describe('TypeBuilder', function() {
             invokeWithLayer.should.be.an.instanceof(Function);
             var nonce = '0xf67b7768bf4854bb15fa840ec843875f';
             var channel = {
-                callMethod: function(method, callback) {
+                callMethod: function (method, callback) {
                     var buffer = method.serialize();
                     var Type = TypeBuilder.requireTypeFromBuffer(buffer);
                     var resObj = new Type({buffer: buffer});
@@ -136,7 +136,7 @@ describe('TypeBuilder', function() {
                     query: query.serialize()
                 },
                 channel: channel,
-                callback: function(ex, response) {
+                callback: function (ex, response) {
                     if (ex) console.warn(ex);
                     var resPQ = new reqPQ.Type({buffer: response.query}).deserialize();
                     resPQ.nonce.should.be.eql(nonce);
@@ -146,8 +146,8 @@ describe('TypeBuilder', function() {
         })
     });
 
-    describe('#buildTypes()', function() {
-        it('should build both types and functions', function() {
+    describe('#buildTypes()', function () {
+        it('should build both types and functions', function () {
             var api = {
                 "constructors": [{
                     "id": "85337187",
@@ -192,8 +192,7 @@ describe('TypeBuilder', function() {
     });
 
 
-
-    describe('compositeType', function() {
+    describe('compositeType', function () {
 
         var Message = new TypeBuilder('namespace', {
             "id": "1538843921",
@@ -262,8 +261,8 @@ describe('TypeBuilder', function() {
             }
         };
 
-        describe('#init()', function() {
-            it('should return an instance', function(done) {
+        describe('#init()', function () {
+            it('should return an instance', function (done) {
                 var msg = new ModelType();
                 msg.should.be.ok;
                 msg.should.be.an.instanceof(ModelType);
@@ -284,8 +283,8 @@ describe('TypeBuilder', function() {
             })
         });
 
-        describe('#serialize()', function() {
-            it('should serialize the msg', function(done) {
+        describe('#serialize()', function () {
+            it('should serialize the msg', function (done) {
                 var msg = new ModelType(model);
                 var buffer = msg.serialize();
                 buffer.should.be.ok;
@@ -294,8 +293,8 @@ describe('TypeBuilder', function() {
             })
         });
 
-        describe('#deserialize()', function() {
-            it('should de-serialize the msg', function(done) {
+        describe('#deserialize()', function () {
+            it('should de-serialize the msg', function (done) {
                 var msg = new ModelType({
                     buffer: new Buffer('66b301a48fece2fc77ba4aa57373907784ba4aa57390738400000000080000006a0401000a1a0000', 'hex')
                 });

@@ -1,47 +1,47 @@
 {
-    "name": "telegram-tl-node",
-    "version": "0.9.0",
-    "description": "Telegram TypeLanguage library",
-    "keywords": [
-        "telegram",
-        "tl",
-        "typelanguage",
-        "type-language",
-        "library"
-    ],
-    "author": "Enrico Stara <enrico.stara@gmail.com>",
-    "homepage": "https://github.com/enricostara/telegram-tl-node",
-    "repository": {
-        "type": "git",
-        "url": "git://github.com/enricostara/telegram-tl-node.git"
-    },
-    "bugs": {
-        "url": "https://github.com/enricostara/telegram-tl-node/issues"
-    },
-    "license": "MIT",
-    "dependencies": {
-        "colors": "latest",
-        "get-log": "latest",
-        "jsbn": "latest"
-    },
-    "devDependencies": {
-        "codeclimate-test-reporter": "latest",
-        "coveralls": "latest",
-        "gulp": "latest",
-        "gulp-jshint": "latest",
-        "gulp-mocha": "latest",
-        "istanbul": "latest",
-        "mocha": "latest",
-        "mocha-better-spec-reporter": "1.x",
-        "mocha-lcov-reporter": "latest",
-        "should": "latest"
-    },
-    "main": "index",
-    "engines": {
-        "node": ">0.10.30"
-    },
-    "scripts": {
-        "test": "DEBUG=-mocha*,* gulp test",
-        "coveralls": "DEBUG=-mocha*,* istanbul cover ./node_modules/gulp/bin/gulp.js cover && cat ./coverage/lcov.info | coveralls && codeclimate < ./coverage/lcov.info &&  rm -rf ./coverage"
-    }
+  "name": "telegram-tl-node",
+  "version": "0.9.0",
+  "description": "Telegram TypeLanguage library",
+  "keywords": [
+    "telegram",
+    "tl",
+    "typelanguage",
+    "type-language",
+    "library"
+  ],
+  "author": "Enrico Stara <enrico.stara@gmail.com>",
+  "homepage": "https://github.com/enricostara/telegram-tl-node",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/enricostara/telegram-tl-node.git"
+  },
+  "bugs": {
+    "url": "https://github.com/enricostara/telegram-tl-node/issues"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "colors": "latest",
+    "get-log": "latest",
+    "jsbn": "latest"
+  },
+  "devDependencies": {
+    "codeclimate-test-reporter": "latest",
+    "coveralls": "latest",
+    "gulp": "latest",
+    "gulp-jshint": "latest",
+    "gulp-mocha": "latest",
+    "istanbul": "latest",
+    "mocha": "latest",
+    "mocha-better-spec-reporter": "1.x",
+    "mocha-lcov-reporter": "latest",
+    "should": "latest"
+  },
+  "main": "index",
+  "engines": {
+    "node": ">0.10.30"
+  },
+  "scripts": {
+    "test": "DEBUG=-mocha*,* ./node_modules/gulp/bin/gulp.js test",
+    "coveralls": "DEBUG=-mocha*,* istanbul cover ./node_modules/gulp/bin/gulp.js cover && cat ./coverage/lcov.info | coveralls && codeclimate < ./coverage/lcov.info &&  rm -rf ./coverage"
+  }
 }
