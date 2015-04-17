@@ -151,7 +151,7 @@ describe('TypeBuilder', function () {
             var api = {
                 "constructors": [{
                     "id": "85337187",
-                    "predicate": "resPQ",
+                    "predicate": "auth.resPQ",
                     "params": [{
                         "name": "nonce",
                         "type": "int128"
@@ -165,29 +165,42 @@ describe('TypeBuilder', function () {
                         "name": "server_public_key_fingerprints",
                         "type": "Vector<long>"
                     }],
-                    "type": "ResPQ"
+                    "type": "auth.ResPQ"
+                }, {
+                    "id": "8768",
+                    "predicate": "auth.other.",
+                    "params": [],
+                    "type": 'auth.Other'
+                }, {
+                    "id": "4352",
+                    "predicate": ".auth.other2",
+                    "params": [],
+                    "type": 'auth.Other'
                 }],
                 "methods": [{
                     "id": "1615239032",
-                    "method": "req_pq",
+                    "method": "auth.req_pq",
                     "params": [{
                         "name": "nonce",
                         "type": "int128"
                     }],
-                    "type": "ResPQ"
+                    "type": "auth.ResPQ"
                 }]
             };
             var type = {_id: 'type'};
-            var constructors = ['ResPQ'];
+            var constructors = ['auth.ResPQ', 'auth.Other', 'auth.Other2'];
             TypeBuilder.buildTypes(api.constructors, constructors, type);
             type.should.be.ok;
-            type.should.have.properties(['ResPQ']);
+            type.auth.should.be.ok;
+            type.auth.should.have.properties(['ResPQ', 'Other', 'Other2']);
+            //type.auth.ResPQ.typeName.should.be.equal('type.auth.ResPQ');
 
             var service = {_id: 'service'};
-            var methods = ['req_pq'];
+            var methods = ['auth.req_pq'];
             TypeBuilder.buildTypes(api.methods, methods, service, true);
             service.should.be.ok;
-            service.should.have.properties(['req_pq']);
+            service.auth.should.be.ok;
+            service.auth.should.have.properties(['req_pq']);
         })
     });
 
