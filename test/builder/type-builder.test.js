@@ -1,7 +1,8 @@
 require('should');
-var TypeBuilder = require('../lib/type-builder');
-var TypeObject = require('../lib/type-object');
-var TypeVector = require('../lib/type-vector');
+require('requirish')._(module);
+var TypeBuilder = require('lib/builder/type-builder');
+var TypeObject = require('lib/type-object');
+var TypeVector = require('lib/type-vector');
 
 describe('TypeBuilder', function () {
 
@@ -27,16 +28,17 @@ describe('TypeBuilder', function () {
         })
     });
 
+    var ResPQ = new TypeBuilder('namespace', {
+        "id": "85337187", "predicate": "resPQ", "params": [
+            {"name": "nonce", "type": "int128"},
+            {"name": "server_nonce", "type": "int128"},
+            {"name": "pq", "type": "bytes"},
+            {"name": "server_public_key_fingerprints", "type": "Vector<long>"}
+        ], "type": "ResPQ"
+    }).getType();
+
     describe('#buildTypeConstructor({ResPQ}).deserialize()', function () {
         it('should build and de-serialize an instance of ResPQ', function (done) {
-            var ResPQ = new TypeBuilder('namespace', {
-                "id": "85337187", "predicate": "resPQ", "params": [
-                    {"name": "nonce", "type": "int128"},
-                    {"name": "server_nonce", "type": "int128"},
-                    {"name": "pq", "type": "bytes"},
-                    {"name": "server_public_key_fingerprints", "type": "Vector<long>"}
-                ], "type": "ResPQ"
-            }).getType();
             ResPQ.should.be.an.instanceof(Function);
             var obj = new ResPQ({
                 buffer: new Buffer(
@@ -63,14 +65,6 @@ describe('TypeBuilder', function () {
 
     describe('#buildTypeConstructor({ResPQ}).serialize()', function () {
         it('should build and serialize an instance of ResPQ', function (done) {
-            var ResPQ = new TypeBuilder('namespace', {
-                "id": "85337187", "predicate": "resPQ", "params": [
-                    {"name": "nonce", "type": "int128"},
-                    {"name": "server_nonce", "type": "int128"},
-                    {"name": "pq", "type": "bytes"},
-                    {"name": "server_public_key_fingerprints", "type": "Vector<long>"}
-                ], "type": "ResPQ"
-            }).getType();
             ResPQ.should.be.an.instanceof(Function);
             var obj = new ResPQ({
                 props: {
