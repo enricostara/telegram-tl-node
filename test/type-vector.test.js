@@ -2,7 +2,7 @@ require('should');
 require('requirish')._(module);
 var TypeVector = require('lib/type-vector');
 var TypeObject = require('lib/type-object');
-var TypeBuilder = require('lib/builder/type-builder');
+var tl = require('lib/builder/type-builder');
 
 describe('TypeVector', function () {
 
@@ -27,7 +27,6 @@ describe('TypeVector', function () {
             done();
         })
     });
-
     describe('#deserialize()', function () {
         it('should de-serialize the list', function (done) {
             var list = new TypeVector({type: 'long', buffer: new Buffer('15C4B51C01000000216BE86C022BB4C3', 'hex')});
@@ -57,7 +56,7 @@ describe('TypeVector', function () {
     });
 
 
-    var Message = new TypeBuilder('namespace', {
+    var Message = tl.buildType('namespace', {
         "id": "1538843921",
         "predicate": "message",
         "params": [{
@@ -74,9 +73,8 @@ describe('TypeVector', function () {
             "type": "Object"
         }],
         "type": "Message"
-    }).getType();
-
-    var Body = new TypeBuilder('namespace', {
+    });
+    var Body = tl.buildType('namespace', {
         "id": "66667",
         "predicate": "Body",
         "params": [
@@ -86,7 +84,7 @@ describe('TypeVector', function () {
             }
         ],
         "type": "Body"
-    }).getType();
+    });
 
     describe('#serialize()', function () {
         it('should serialize the list with a bare Message ', function (done) {
