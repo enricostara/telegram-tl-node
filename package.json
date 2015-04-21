@@ -1,6 +1,6 @@
 {
   "name": "telegram-tl-node",
-  "version": "0.9.1",
+  "version": "0.9.5",
   "description": "Telegram TypeLanguage library",
   "keywords": [
     "telegram",
