@@ -121,10 +121,16 @@ describe('TypeVector', function () {
     describe('#deserialize()', function () {
         it('should de-serialize the list with a bare Message', function (done) {
             var list = new TypeVector({
+                module: 'namespace',
                 type: '%Message',
                 buffer: new Buffer('15c4b51c02000000010000000000000001000000080000006b0401000a1a0000020000000000000003000000080000006b040100611e0000', 'hex')
             });
-            list.deserialize().should.be.ok;
+            try {
+                list.deserialize().should.be.ok;
+            } catch (e) {
+                console.log('error :', e.stack);
+                throw e;
+            }
             list.getList().length.should.be.equal(2);
 
             var message = list.getList()[0];
