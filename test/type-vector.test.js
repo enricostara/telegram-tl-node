@@ -110,8 +110,13 @@ describe('TypeVector', function () {
                     })
                 }
             });
-            var list = new TypeVector({type: '%Message', list: [message1, message2]});
-            var buffer = list.serialize();
+            try {
+                var list = new TypeVector({module: 'namespace', type: '%Message', list: [message1, message2]});
+                var buffer = list.serialize();
+            } catch (e) {
+                console.log('error: ', e);
+                throw e;
+            }
             buffer.should.be.ok;
             buffer.toString('hex').should.be.equal('15c4b51c02000000010000000000000001000000080000006b0401000a1a0000020000000000000003000000080000006b040100611e0000');
             done();
