@@ -67,7 +67,12 @@ describe('ConstructorBuilder', function () {
             });
             obj.should.be.an.instanceof(ResPQ);
             obj.should.be.an.instanceof(TypeObject);
-            obj.deserialize();
+            try {
+                obj.deserialize();
+            } catch (e) {
+                console.log('error: ', e.stack);
+                throw e;
+            }
             obj.should.have.properties({
                 id: '63241605',
                 typeName: 'namespace.ResPQ',
@@ -82,7 +87,6 @@ describe('ConstructorBuilder', function () {
             done();
         })
     });
-
 
     describe('compositeType', function () {
 
@@ -190,18 +194,25 @@ describe('ConstructorBuilder', function () {
                 var msg = new ModelType({
                     buffer: new Buffer('66b301a48fece2fc77ba4aa57373907784ba4aa57390738400000000080000006a0401000a1a0000', 'hex')
                 });
-                msg.deserialize().should.be.ok;
+                try {
+                    console.log('type: ', ModelType);
+                    msg.deserialize();
+                } catch (e) {
+                    console.log('error: ', e.stack);
+                    throw e;
+                }
                 msg.should.be.an.instanceof(ModelType);
                 msg.should.have.properties({
                     server_salt: '0xfce2ec8fa401b366',
                     session_id: '0x77907373a54aba77'
                 });
-                msg.payload.should.be.an.instanceof(ConstructorBuilder.requireTypeByName('Message'));
+                msg.payload.should.be.an.instanceof(ConstructorBuilder.requireTypeByName('namespace.Message'));
                 msg.payload.bytes.should.be.equal(8);
                 msg.payload.body.should.be.an.instanceof(Body);
                 msg.payload.body.key.should.be.equal(6666);
                 done();
             })
         });
+
     });
 });
