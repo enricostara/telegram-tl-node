@@ -140,6 +140,16 @@ describe('TypeObject', function () {
             done();
         })
     });
+    describe('#writeString()', function () {
+        it('should write an  empty string', function (done) {
+            var obj = new TypeObject();
+            obj.writeString('').should.be.true;
+            var bytes = obj.retrieveBuffer();
+            bytes.length.should.be.equal(4);
+            bytes.toString('hex').should.be.eql('00000000');
+            done();
+        })
+    });
 
     describe('#readInt()', function () {
         it('should read an int value', function (done) {
@@ -210,6 +220,15 @@ describe('TypeObject', function () {
             var str = obj.readString();
             str.should.be.eql('Lorem ipsum dolor sit amet, consectetur adipisci elit, ' +
             'sed eiusmod tempor incidunt ut labore et dolore magna aliqua.');
+            done();
+        })
+    });
+
+    describe('#readString()', function () {
+        it('should read an empty string', function (done) {
+            var obj = new TypeObject(new Buffer('00000000', 'hex'));
+            var str = obj.readString();
+            str.should.be.eql('');
             done();
         })
     });
