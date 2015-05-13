@@ -40,8 +40,11 @@ describe('TypeVector', function () {
     describe('#deserialize()', function () {
         it('should not de-serialize the list cause type id mismatch', function (done) {
             var list = new TypeVector({type: 'long', buffer: new Buffer('25C4B51C01000000216BE86C022BB4C3', 'hex')});
-            list.deserialize().should.not.be.ok;
-            done();
+            try {
+                list.deserialize()
+            } catch (e) {
+                done();
+            }
         })
     });
 
