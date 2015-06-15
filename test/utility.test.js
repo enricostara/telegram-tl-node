@@ -9,6 +9,9 @@ describe('utility', function () {
         it('should return a printable ', function (done) {
             var obj = new TypeObject();
             obj.number = 1000;
+            obj.bool = false;
+            obj.func = function () {
+            };
             obj.exclude = 1000;
             obj.string = 'string value';
             obj.buffer = new Buffer('ffff', 'hex');
@@ -25,13 +28,13 @@ describe('utility', function () {
             innerObj.buffer = new Buffer('eeeeee', 'hex');
             obj.innerObj = innerObj;
 
-            obj.toPrintable(true).should.be.equal('{ number: 1000, exclude: 1000, string: "string value", buffer[2]: 0xffff, ' +
-            'array: ["abc", "def"], array2: [{ number: 100 }, { number: 200 }], ' +
-            'innerObj: { number: 2000, exclude: 2000, innerExclude: 2000, buffer[3]: 0xeeeeee } }');
+            obj.toPrintable(true).should.be.equal('{ number: 1000, bool: false, exclude: 1000, string: "string value", buffer[2]: 0xffff, ' +
+                'array: ["abc", "def"], array2: [{ number: 100 }, { number: 200 }], ' +
+                'innerObj: { number: 2000, exclude: 2000, innerExclude: 2000, buffer[3]: 0xeeeeee } }');
             obj.toPrintable({
                 exclude: true,
                 innerObj: {innerExclude: true}
-            }, true).should.be.equal('{ number: 1000, string: "string value", buffer[2]: 0xffff, ' +
+            }, true).should.be.equal('{ number: 1000, bool: false, string: "string value", buffer[2]: 0xffff, ' +
                 'array: ["abc", "def"], array2: [{ number: 100 }, { number: 200 }], ' +
                 'innerObj: { number: 2000, exclude: 2000, buffer[3]: 0xeeeeee } }');
             console.log(obj.toPrintable({
