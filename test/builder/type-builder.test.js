@@ -28,6 +28,7 @@ describe('TypeBuilder', function () {
             });
             reqPQ.should.be.an.instanceof(Function);
             reqPQ.Type.should.be.an.instanceof(Function);
+            reqPQ._name.should.be.eql('req_pq');
             invokeWithLayer.should.be.an.instanceof(Function);
             var nonce = '0xf67b7768bf4854bb15fa840ec843875f';
             var channel = {
