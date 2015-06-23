@@ -115,6 +115,8 @@ describe('TypeVector', function () {
             });
             try {
                 var list = new TypeVector({module: 'namespace', type: '%Message', list: [message1, message2]});
+                //test double serialization
+                list.serialize();
                 var buffer = list.serialize();
             } catch (e) {
                 console.log('error: ', e);

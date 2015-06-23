@@ -48,6 +48,8 @@ describe('ConstructorBuilder', function () {
                     server_public_key_fingerprints: new TypeVector({type: 'long', list: ['0xc3b42b026ce86b21']})
                 }
             });
+            // test double serialization
+            obj.serialize();
             var objBuffer = obj.serialize();
             objBuffer.toString('hex').toUpperCase().should.be.
                 eql('632416053E0549828CCA27E966B301A48FECE2FCA5CF4D33F4A11EA877BA4AA5739073300817ED48941A08F98100000015C4B51C01000000216BE86C022BB4C3');
