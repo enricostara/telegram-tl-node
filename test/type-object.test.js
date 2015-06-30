@@ -194,9 +194,8 @@ describe('TypeObject', function () {
 
     describe('#readBytes()', function () {
         it('should read a lot of bytes', function (done) {
-
             var buffers = [];
-            buffers.push(new Buffer('7f5d0200', 'hex'));
+            buffers.push(new Buffer('fe5d0200', 'hex'));
             var data = new Buffer(605);
             data.fill(254);
             buffers.push(data);
