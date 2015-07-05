@@ -6,6 +6,7 @@ var tl = require('lib/builder/type-builder');
 
 describe('TypeVector', function () {
 
+
     describe('#init()', function () {
         it('should return an instance', function (done) {
             var list = new TypeVector();
@@ -158,6 +159,89 @@ describe('TypeVector', function () {
                 bytes: 8
             });
             message.body.key.should.be.equal(7777);
+            done();
+        })
+    });
+
+
+    var Type1 = tl.buildType('namespace', {
+        "id": "66668",
+        "predicate": "Type1",
+        "params": [
+            {
+                "name": "key",
+                "type": "int"
+            }
+        ],
+        "type": "AType"
+    });
+
+    var Type2 = tl.buildType('namespace', {
+        "id": "66669",
+        "predicate": "Type2",
+        "params": [
+            {
+                "name": "key",
+                "type": "int"
+            }
+        ],
+        "type": "AType"
+    });
+
+    describe('#serialize()', function () {
+        it('should serialize the list with a polymorfic type ', function (done) {
+            var message1 =  new Type1({
+                        props: {
+                            key: 6666
+                        }
+                    });
+            var message2 = new Type2({
+                        props: {
+                            key: 7777
+                        }
+                    });
+            try {
+                var list = new TypeVector({module: 'namespace', type: 'AType', list: [message1, message2]});
+                //test double serialization
+                list.serialize();
+                var buffer = list.serialize();
+            } catch (e) {
+                console.log('error: ', e);
+                throw e;
+            }
+            buffer.should.be.ok;
+            console.log(buffer.toString('hex'));
+            buffer.toString('hex').should.be.equal('15c4b51c020000006c0401000a1a00006d040100611e0000');
+            done();
+        })
+    });
+
+
+    describe('#deserialize()', function () {
+        it('should de-serialize the list with a polymorfic Message', function (done) {
+            var list = new TypeVector({
+                module: 'namespace',
+                type: 'AType',
+                buffer: new Buffer('15c4b51c020000006c0401000a1a00006d040100611e0000', 'hex')
+            });
+            try {
+                list.deserialize().should.be.ok;
+            } catch (e) {
+                console.log('error :', e.stack);
+                throw e;
+            }
+            list.getList().length.should.be.equal(2);
+            var obj1 = list.getList()[0];
+            obj1.should.have.properties({
+                "id": "6c040100",
+                "key": 6666
+            });
+            var obj2 = list.getList()[1];
+            obj2.should.have.properties({
+                "id": "6d040100",
+                "key": 7777
+            });
+
             done();
         })
     });
