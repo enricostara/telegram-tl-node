@@ -40,7 +40,7 @@ $ npm test
 
 - [get-log](https://github.com/enricostara/get-log): a Node.js Logging Utility, easy to use and ready for production.
 
-- [jsbn](https://github.com/enricostara/get-log): a portable implementation of large-number math in pure JavaScript, 
+- [jsbn](https://github.com/andyperlitch/jsbn): a portable implementation of large-number math in pure JavaScript, 
 enabling public-key crypto and other applications on desktop and mobile browsers.
 
 ## License
