@@ -40,6 +40,18 @@ describe('TypeObject', function () {
         })
     });
 
+    describe('#writeDouble()', function () {
+        it('should write a double value', function (done) {
+            var obj = new TypeObject();
+            obj.writeDouble(0xdeadbeefcafebabe).should.be.true;
+            var bytes = obj.retrieveBuffer();
+            bytes.length.should.be.equal(8);
+            bytes.should.be.eql(new Buffer([0xd7, 0x5f, 0xf9, 0xdd, 0xb7, 0xd5, 0xeb, 0x43]));
+            obj.writeDouble(0).should.be.false;
+            done();
+        })
+    });
+
     describe('#_writeBigInt()', function () {
         it('should write a big int value', function (done) {
             var obj = new TypeObject();
@@ -157,6 +169,16 @@ describe('TypeObject', function () {
             var intValue = obj.readInt();
             intValue.should.be.equal(4294967294);
             obj.getReadOffset().should.be.equal(4);
+            done();
+        })
+    });
+
+    describe('#readDouble()', function () {
+        it('should read a double value', function (done) {
+            var obj = new TypeObject(new Buffer('d75ff9ddb7d5eb43', 'hex'));
+            var doubleValue = obj.readDouble();
+            doubleValue.should.be.equal(0xdeadbeefcafebabe);
+            obj.getReadOffset().should.be.equal(8);
             done();
         })
     });
