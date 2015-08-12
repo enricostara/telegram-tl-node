@@ -13,15 +13,15 @@ describe('TypeVector', function () {
             list.should.be.ok;
             list.should.be.an.instanceof(TypeVector);
             list.should.be.an.instanceof(TypeObject);
-            list.should.have.properties({id: '15c4b51c', type: 'Int'});
+            list.should.have.properties({_typeId: '15c4b51c', type: 'Int'});
             list.isReadonly().should.be.false;
 
             var list = new TypeVector({type: 'long', buffer: new Buffer('15C4B51C01000000216BE86C022BB4C3', 'hex')});
-            list.should.have.properties({id: '15c4b51c', type: 'Long'});
+            list.should.have.properties({_typeId: '15c4b51c', type: 'Long'});
             list.isReadonly().should.be.true;
 
             var list = new TypeVector({type: 'long', list: [1, 2, 3]});
-            list.should.have.properties({id: '15c4b51c', type: 'Long'});
+            list.should.have.properties({_typeId: '15c4b51c', type: 'Long'});
             list.isReadonly().should.be.false;
             list.getList().should.be.eql([1, 2, 3]);
 
@@ -233,12 +233,12 @@ describe('TypeVector', function () {
             list.getList().length.should.be.equal(2);
             var obj1 = list.getList()[0];
             obj1.should.have.properties({
-                "id": "6c040100",
+                "_typeId": "6c040100",
                 "key": 6666
             });
             var obj2 = list.getList()[1];
             obj2.should.have.properties({
-                "id": "6d040100",
+                "_typeId": "6d040100",
                 "key": 7777
             });
 
