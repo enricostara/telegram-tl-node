@@ -23,7 +23,7 @@ describe('ConstructorBuilder', function () {
             obj.should.be.an.instanceof(P_Q_inner_data);
             obj.should.be.an.instanceof(TypeObject);
             obj._typeId.should.be.eql('ec5ac983');
-            obj._typeName.should.be.eql('namespace.P_q_inner_data');
+            obj.getTypeName().should.be.eql('namespace.P_q_inner_data');
             done();
         })
     });
@@ -68,6 +68,7 @@ describe('ConstructorBuilder', function () {
                     'hex')
             });
             obj.should.be.an.instanceof(ResPQ);
+            obj.instanceOf('namespace.ResPQ').should.be.true();
             obj.should.be.an.instanceof(TypeObject);
             try {
                 obj.deserialize();
@@ -77,7 +78,6 @@ describe('ConstructorBuilder', function () {
             }
             obj.should.have.properties({
                 _typeId: '63241605',
-                _typeName: 'namespace.ResPQ',
                 nonce: '0xfce2ec8fa401b366e927ca8c8249053e',
                 server_nonce: '0x30739073a54aba77a81ea1f4334dcfa5'
             });
