@@ -1,6 +1,6 @@
 {
   "name": "telegram-tl-node",
-  "version": "0.11.4",
+  "version": "0.11.5",
   "description": "Telegram TypeLanguage library",
   "keywords": [
     "telegram",
@@ -20,22 +20,22 @@
   },
   "license": "MIT",
   "dependencies": {
-    "colors": "latest",
+    "colors": "1.1.2",
     "get-log": "latest",
     "requirish": "latest",
-    "jsbn": "latest"
+    "jsbn": "0.0.0"
   },
   "devDependencies": {
-    "codeclimate-test-reporter": "latest",
-    "coveralls": "latest",
-    "gulp": "latest",
-    "gulp-jshint": "latest",
-    "gulp-mocha": "latest",
-    "istanbul": "latest",
-    "mocha": "latest",
-    "mocha-better-spec-reporter": "1.x",
-    "mocha-lcov-reporter": "latest",
-    "should": "latest"
+    "codeclimate-test-reporter": "0.1.0",
+    "coveralls": "2.11.3",
+    "gulp": "3.9.0",
+    "gulp-jshint": "1.11.2",
+    "gulp-mocha": "2.1.3",
+    "istanbul": "0.3.17",
+    "mocha": "2.2.5",
+    "mocha-better-spec-reporter": "1.1.2",
+    "mocha-lcov-reporter": "0.0.2",
+    "should": "7.0.2"
   },
   "main": "index",
   "engines": {
